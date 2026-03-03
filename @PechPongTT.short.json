@@ -1,0 +1,64 @@
+﻿{
+  "videos": [
+    {
+      "id": "FcUeRTyrg6I",
+      "label": "Pechpong teaches how to Smash high balls",
+      "start": 4,
+      "end": 30,
+      "mute": 0,
+      "isLandscape": 1,
+      "tdiff": 4,
+      "crop": [0.15, 0.18, 0.85, 0.82]
+    },
+    {
+      "id": "p7H5AXQibmI",
+      "label": "Pechpong Shows how to loop heavy underspin pushes!",
+      "start": 4,
+      "end": 30,
+      "mute": 0,
+      "isLandscape": 1,
+      "tdiff": 4,
+      "crop": [0.15, 0.18, 0.85, 0.82]
+    },
+    {
+      "id": "KtsJH9nwsRI",
+      "label": "Pechpong Teaches how to Counterloop Heavy Topspin Loops.",
+      "start": 4,
+      "end": 30,
+      "mute": 0,
+      "isLandscape": 1,
+      "tdiff": 4,
+      "crop": [0.15, 0.18, 0.85, 0.82]
+    },
+    {
+      "id": "0GvA-ZfeHpM",
+      "label": "Pechpong talks about improving backhand banana flip by using momentum and a tip to relax the wrist.",
+      "start": 4,
+      "end": 30,
+      "mute": 0,
+      "isLandscape": 1,
+      "tdiff": 4,
+      "crop": [0.15, 0.18, 0.85, 0.82]
+    },
+    {
+      "id": "VBFxyUjrbxs",
+      "label": "The Roger Federer SABR Table Tennis Style",
+      "start": 4,
+      "end": 30,
+      "mute": 0,
+      "isLandscape": 1,
+      "tdiff": 4,
+      "crop": [0.15, 0.18, 0.85, 0.82]
+    },
+    {
+      "id": "GDljniuLUMo",
+      "label": "Crazy Point USA Nationals  Slips and Gets Back Up Twirl & Smash!",
+      "start": 4,
+      "end": 30,
+      "mute": 0,
+      "isLandscape": 1,
+      "tdiff": 4,
+      "crop": [0.15, 0.18, 0.85, 0.82]
+    }
+  ]
+}

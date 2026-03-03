@@ -8,7 +8,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { overflow: hidden; touch-action: manipulation; background: #000; }
 #rotateWrap { position: fixed; top: 0; left: 0; }
-#gameCanvas { display: block; }
+#gameCanvas  { display: block; }
 
 /* ── Hamburger menu ──────────────────────────────────────────── */
 #menuWrap { position: fixed; z-index: 999; width: 48px; height: 48px; }
@@ -21,7 +21,6 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
 }
 #menuBtn.open { background: rgba(30,30,30,0.97); }
 #menuBtn span { display: block; width: 100%; height: 3px; background: #fff; border-radius: 2px; }
-
 #menuPanel {
     position: absolute; bottom: 54px; right: 0; z-index: 998;
     background: rgba(25,25,25,0.96); border-radius: 10px;
@@ -33,7 +32,6 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
 #menuPanel::-webkit-scrollbar { width: 6px; }
 #menuPanel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 3px; }
 #menuPanel.open { display: flex; }
-
 #menuDateStamp {
     padding: 6px 12px 2px 12px; font: 10px Arial, sans-serif;
     color: rgba(255,255,255,0.35); text-align: right;
@@ -41,7 +39,8 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
 }
 .menu-item {
     padding: 13px 18px; color: #fff; font: 15px Arial, sans-serif;
-    cursor: pointer; white-space: nowrap; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0;
+    cursor: pointer; white-space: nowrap;
+    border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0;
 }
 .menu-item:last-child { border-bottom: none; }
 .menu-item:hover, .menu-item:active { background: rgba(255,255,255,0.12); }
@@ -54,34 +53,29 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
     font-family: Arial, sans-serif; color: #fff;
 }
 #vmOverlay.open { display: flex; }
-
 #vmHeader {
     display: flex; align-items: center; gap: 8px;
     padding: 10px 14px; background: #1a1a2e; flex-shrink: 0;
     border-bottom: 1px solid #333; flex-wrap: wrap;
 }
 #vmHeader h2 { font-size: 16px; color: #8ef; margin-right: 6px; }
-
 #vmAdminBadge {
     display: none; padding: 3px 10px; border-radius: 12px;
     background: #3a1a0a; border: 1px solid #f80; color: #fc8;
     font-size: 11px; font-weight: bold;
 }
 #vmAdminBadge.visible { display: inline-block; }
-
 #vmUserBadge {
     display: none; padding: 3px 10px; border-radius: 12px;
-    background: #0a2a1a; border: 1px solid #0f8; color: #afa;
-    font-size: 11px;
+    background: #0a2a1a; border: 1px solid #0f8; color: #afa; font-size: 11px;
 }
 #vmUserBadge.visible { display: inline-block; }
-
 .vm-tab {
     padding: 5px 14px; border-radius: 6px; cursor: pointer;
     background: #2a2a3e; border: 1px solid #444; font-size: 13px; color: #ccc;
 }
 .vm-tab.active { background: #3a5a8a; border-color: #8ef; color: #fff; }
-.vm-tab:hover { background: #3a3a5e; }
+.vm-tab:hover  { background: #3a3a5e; }
 
 #vmToolbar {
     display: flex; align-items: center; gap: 6px;
@@ -92,34 +86,48 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
     padding: 5px 12px; border-radius: 5px; cursor: pointer; font-size: 12px;
     border: 1px solid #555; background: #2a2a3e; color: #ddd; white-space: nowrap;
 }
-.vm-btn:hover { background: #3a3a5e; border-color: #8ef; color: #fff; }
+.vm-btn:hover  { background: #3a3a5e; border-color: #8ef; color: #fff; }
 .vm-btn.danger { border-color: #f55; color: #f88; }
-.vm-btn.danger:hover { background: #3e1a1a; }
+.vm-btn.danger:hover  { background: #3e1a1a; }
 .vm-btn.success { border-color: #5f5; color: #afa; }
 .vm-btn.success:hover { background: #1a3e1a; }
 .vm-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .vm-btn:disabled:hover { background: #2a2a3e; border-color: #555; color: #ddd; }
-
 #vmSelInfo { margin-left: auto; font-size: 12px; color: #888; white-space: nowrap; }
 
+/* ── Table ───────────────────────────────────────────────────── */
 #vmTableWrap {
     flex: 1; overflow: auto;
     scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent;
 }
 #vmTableWrap::-webkit-scrollbar { width: 7px; height: 7px; }
 #vmTableWrap::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 4px; }
-
-#vmTable { border-collapse: collapse; width: 100%; min-width: 500px; font-size: 13px; }
+#vmTable { border-collapse: collapse; width: 100%; font-size: 13px; }
 #vmTable th {
     position: sticky; top: 0; background: #1e1e3a; color: #8ef;
     padding: 8px 10px; text-align: left; white-space: nowrap;
-    border-bottom: 2px solid #444; user-select: none; cursor: pointer; z-index: 2;
+    border-bottom: 2px solid #444; user-select: none; z-index: 2;
+    /* column width set via inline style from fieldConfig.width */
+    overflow: hidden; text-overflow: ellipsis;
 }
-#vmTable th:hover { background: #2a2a5a; }
+#vmTable th.sortable { cursor: pointer; }
+#vmTable th.sortable:hover { background: #2a2a5a; }
 #vmTable th.sort-asc::after  { content: " ▲"; font-size: 10px; }
 #vmTable th.sort-desc::after { content: " ▼"; font-size: 10px; }
 #vmTable th.no-sort { cursor: default; }
-#vmTable td { padding: 6px 10px; border-bottom: 1px solid #222; vertical-align: middle; white-space: nowrap; }
+
+/* Resize handle on each th */
+.vm-resize-handle {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 6px;
+    cursor: col-resize; background: transparent;
+    border-right: 2px solid transparent;
+}
+.vm-resize-handle:hover, .vm-resize-handle.resizing { border-right-color: #8ef; }
+
+#vmTable td {
+    padding: 6px 10px; border-bottom: 1px solid #222;
+    vertical-align: middle; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 #vmTable tr.vm-row { cursor: pointer; }
 #vmTable tr.vm-row:hover td { background: rgba(255,255,255,0.05); }
 #vmTable tr.vm-row.selected td { background: rgba(58,90,138,0.55); }
@@ -129,47 +137,60 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
 #vmTable td.locked:hover { background: none !important; outline: none !important; }
 #vmTable input.vm-cell-input {
     background: #0a0a1a; border: 1px solid #8ef; color: #fff;
-    padding: 2px 5px; border-radius: 3px; font-size: 13px; width: 100%; min-width: 60px;
+    padding: 2px 5px; border-radius: 3px; font-size: 13px; width: 100%; min-width: 40px;
 }
 .vm-stars { color: #fc8; cursor: pointer; font-size: 15px; letter-spacing: 2px; }
-.vm-action-btn {
-    padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 11px;
-    border: 1px solid #555; background: #1e1e2e; color: #ccc; margin: 0 2px;
-}
-.vm-action-btn:hover { background: #2e2e5e; border-color: #8ef; color: #fff; }
 
-/* Field Manager panel */
+/* ── Field / column manager panel ────────────────────────────── */
 #vmFieldPanel {
     display: none; padding: 14px 18px; background: #111122;
-    border-top: 1px solid #333; flex-shrink: 0; flex-wrap: wrap; gap: 10px;
+    border-top: 1px solid #333; flex-shrink: 0; flex-wrap: wrap; gap: 8px;
 }
 #vmFieldPanel.open { display: flex; align-items: flex-start; }
-#vmFieldPanel h3 { width: 100%; font-size: 14px; color: #fc8; margin-bottom: 6px; }
+#vmFieldPanel h3 { width: 100%; font-size: 14px; color: #fc8; margin-bottom: 4px; }
 .vm-field-chip {
-    display: inline-flex; align-items: center; gap: 5px;
+    display: inline-flex; align-items: center; gap: 4px;
     padding: 4px 10px; border-radius: 20px; font-size: 12px;
     border: 1px solid #555; background: #2a2a3e; color: #ddd;
-    cursor: grab; user-select: none;
+    cursor: grab; user-select: none; position: relative;
 }
 .vm-field-chip.active-field { border-color: #5f5; color: #afa; background: #1a3a1a; }
-.vm-field-chip .chip-toggle { cursor: pointer; font-size: 14px; }
-.vm-field-chip.dragging { opacity: 0.4; }
-.vm-field-chip.drag-over { border-color: #fc8; background: #3a2a0a; }
+.vm-field-chip .chip-toggle  { cursor: pointer; font-size: 14px; }
+.vm-field-chip.dragging      { opacity: 0.4; }
+.vm-field-chip.drag-over     { border-color: #fc8; background: #3a2a0a; }
+/* Width input inside chip — shown for active fields when admin */
+.chip-width-input {
+    width: 42px; background: #0a0a1a; border: 1px solid #555; color: #ccc;
+    padding: 1px 4px; border-radius: 3px; font-size: 11px; text-align: center;
+}
+.chip-width-input:focus { border-color: #8ef; outline: none; }
 
-/* Add-field row */
+/* Add-field row (admin only) */
 #vmAddFieldRow {
     display: none; padding: 8px 14px; background: #0e0e1e;
     border-bottom: 1px solid #333; flex-shrink: 0;
     align-items: center; gap: 8px; flex-wrap: wrap;
 }
 #vmAddFieldRow.open { display: flex; }
-#vmAddFieldRow input {
-    background: #0a0a1a; border: 1px solid #555; color: #fff;
-    padding: 4px 8px; border-radius: 5px; font-size: 12px; width: 140px;
-}
-#vmAddFieldRow select {
+#vmAddFieldRow label { font-size: 12px; color: #fc8; }
+#vmAddFieldRow input, #vmAddFieldRow select {
     background: #0a0a1a; border: 1px solid #555; color: #fff;
     padding: 4px 8px; border-radius: 5px; font-size: 12px;
+}
+#vmNewFieldKey   { width: 120px; }
+#vmNewFieldLabel { width: 120px; }
+
+/* Backup panel */
+#vmBackupPanel {
+    display: none; padding: 8px 14px; background: #0e0e1e;
+    border-bottom: 1px solid #333; flex-shrink: 0;
+    align-items: center; gap: 8px; flex-wrap: wrap;
+}
+#vmBackupPanel.open { display: flex; }
+#vmBackupPanel label { font-size: 12px; color: #fc8; }
+#vmBackupList {
+    background: #0a0a1a; border: 1px solid #444; color: #fff;
+    padding: 3px 8px; border-radius: 5px; font-size: 12px; min-width: 220px;
 }
 
 /* Admin login modal */
@@ -194,7 +215,7 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
 #vmLoginError { color: #f66; font-size: 12px; min-height: 16px; }
 .vm-login-btns { display: flex; gap: 8px; justify-content: flex-end; }
 
-/* status bar */
+/* Status bar */
 #vmStatus {
     padding: 5px 14px; font-size: 11px; color: #888;
     background: #0a0a1a; border-top: 1px solid #222; flex-shrink: 0;
@@ -215,7 +236,7 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
         <div id="menuDateStamp"></div>
         <div class="menu-item" id="miPlay">Play</div>
         <div class="menu-divider"></div>
-        <div class="menu-item" id="miTables">Tables</div>
+        <div class="menu-item" id="miTables">Tables  <span style="font-size:10px;opacity:.5">Ctrl-T</span></div>
         <div class="menu-item" id="miHelp">Help</div>
     </div>
     <button id="menuBtn"><span></span><span></span><span></span></button>
@@ -234,18 +255,28 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
     </div>
 
     <div id="vmToolbar">
-        <button class="vm-btn success" id="vmExportBtn">⬇ Export JSON</button>
-        <button class="vm-btn danger"  id="vmResetBtn">↺ Reset</button>
-        <button class="vm-btn" id="vmFieldToggleBtn">⚙ Fields</button>
+        <button class="vm-btn success" id="vmExportBtn" disabled>⬇ Export JSON</button>
+        <button class="vm-btn" id="vmBackupBtn"  disabled>🗂 Backups</button>
+        <button class="vm-btn danger"  id="vmResetBtn"  disabled>↺ Reset</button>
+        <button class="vm-btn" id="vmFieldToggleBtn" disabled>⚙ Fields</button>
         <button class="vm-btn success" id="vmAddFieldBtn" style="display:none">＋ Add Field</button>
         <div id="vmSelInfo">0 selected</div>
     </div>
 
-    <!-- Add-field row (admin only, shown when Fields panel open) -->
+    <!-- Backup panel -->
+    <div id="vmBackupPanel">
+        <label>Backup of:</label>
+        <select id="vmBackupList"></select>
+        <button class="vm-btn success" id="vmBackupSaveBtn">💾 Save backup</button>
+        <button class="vm-btn" id="vmBackupRestoreBtn">⬆ Restore selected</button>
+        <button class="vm-btn danger" id="vmBackupDeleteBtn">🗑 Delete selected</button>
+    </div>
+
+    <!-- Add-field row (admin only) -->
     <div id="vmAddFieldRow">
-        <label style="font-size:12px;color:#fc8">New field:</label>
+        <label>New field:</label>
         <input id="vmNewFieldKey"   placeholder="key (e.g. director)" />
-        <input id="vmNewFieldLabel" placeholder="Label (e.g. Director)" />
+        <input id="vmNewFieldLabel" placeholder="Label" />
         <select id="vmNewFieldType">
             <option value="text">text</option>
             <option value="number">number</option>
@@ -260,8 +291,9 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
         <button class="vm-btn" id="vmNewFieldCancelBtn">Cancel</button>
     </div>
 
+    <!-- Field chips panel -->
     <div id="vmFieldPanel">
-        <h3>Column Fields — drag to reorder · click ●/○ to show/hide</h3>
+        <h3>Columns — drag to reorder · ●/○ show/hide · width box (px) to resize</h3>
     </div>
 
     <div id="vmTableWrap">
@@ -280,7 +312,7 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
 <div id="vmLoginModal">
     <div id="vmLoginBox">
         <h3>🔑 Admin Sign In</h3>
-        <p>Admin access allows editing media metadata, adding/reordering fields, and exporting JSON.</p>
+        <p>Admin access: edit metadata, add/reorder/resize fields, export JSON, manage backups.</p>
         <div class="vm-login-row">
             <label>Password</label>
             <input type="password" id="vmLoginPwd" placeholder="Enter admin password" autocomplete="current-password">
@@ -294,6 +326,7 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
 </div>
 
 <script>
+'use strict';
 // ── Date stamp ─────────────────────────────────────────────────────
 (function(){
     const d = new Date();
@@ -302,195 +335,135 @@ html, body { overflow: hidden; touch-action: manipulation; background: #000; }
         + " " + d.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"});
 })();
 
-// ── Constants ──────────────────────────────────────────────────────
-const GRID_LINES = 6;   // 6 lines → 7 cells each direction (rows 1-7, cols a-g)
-const GRID_COLS  = 7;
-const GRID_ROWS  = 7;
+// ── Grid constants ─────────────────────────────────────────────────
+const GRID_LINES = 6, GRID_COLS = 7, GRID_ROWS = 7;
 
-// SHA-256 of "asdfjklh"
+// SHA-256("asdfjklh")
 const ADMIN_HASH = "29d68fe34bd2ed04d1de57410cb4662d3e4cb4309867ca28edfbd7d278ca3646";
 
 // ── Layout globals ─────────────────────────────────────────────────
 let GW, GH, cellW, cellH, isPortrait, bgColor;
 let showCellLabels = false;
-
-const canvas  = document.getElementById("gameCanvas");
-const ctx     = canvas.getContext("2d");
-const wrap    = document.getElementById("rotateWrap");
-const menuWrap  = document.getElementById("menuWrap");
-const menuBtn   = document.getElementById("menuBtn");
+const canvas   = document.getElementById("gameCanvas");
+const ctx      = canvas.getContext("2d");
+const wrap     = document.getElementById("rotateWrap");
+const menuWrap = document.getElementById("menuWrap");
+const menuBtn  = document.getElementById("menuBtn");
 const menuPanel = document.getElementById("menuPanel");
-
-// ── Cell label helpers ─────────────────────────────────────────────
 const COL_LETTERS = "abcdefg";
-function cellLabel(col, row) { return row + COL_LETTERS[col - 1]; }  // e.g. "1a"
 
 function drawCellLabels() {
     const fs = Math.max(10, Math.floor(Math.min(cellW, cellH) * 0.22));
     ctx.font = "bold " + fs + "px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
     for (let row = 1; row <= GRID_ROWS; row++) {
         for (let col = 1; col <= GRID_COLS; col++) {
-            const cx = (col - 0.5) * cellW;
-            const cy = (row - 0.5) * cellH;
-            const label = cellLabel(col, row);
-            // subtle shadow for readability on any bg
-            ctx.fillStyle = "rgba(0,0,0,0.35)";
-            ctx.fillText(label, cx + 1, cy + 1);
-            ctx.fillStyle = "rgba(60,60,180,0.75)";
-            ctx.fillText(label, cx, cy);
+            const cx = (col-0.5)*cellW, cy = (row-0.5)*cellH;
+            const label = row + COL_LETTERS[col-1];
+            ctx.fillStyle = "rgba(0,0,0,0.35)";  ctx.fillText(label, cx+1, cy+1);
+            ctx.fillStyle = "rgba(60,60,180,0.75)"; ctx.fillText(label, cx, cy);
         }
     }
-    ctx.textAlign = "left";
-    ctx.textBaseline = "alphabetic";
+    ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
 }
 
-// ── Grid rendering ─────────────────────────────────────────────────
 function renderGrid() {
-    ctx.fillStyle = bgColor;
-    ctx.fillRect(0, 0, GW, GH);
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 1;
+    ctx.fillStyle = bgColor; ctx.fillRect(0, 0, GW, GH);
+    ctx.strokeStyle = "#000"; ctx.lineWidth = 1;
     for (let i = 1; i <= GRID_LINES; i++) {
-        const x = GW * i / (GRID_LINES + 1);
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, GH); ctx.stroke();
+        const x = GW * i / (GRID_LINES+1);
+        ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,GH); ctx.stroke();
     }
     for (let i = 1; i <= GRID_LINES; i++) {
-        const y = GH * i / (GRID_LINES + 1);
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(GW, y); ctx.stroke();
+        const y = GH * i / (GRID_LINES+1);
+        ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(GW,y); ctx.stroke();
     }
     if (showCellLabels) drawCellLabels();
 }
 
-// ── Layout setup ───────────────────────────────────────────────────
 function setupLayout() {
     const pw = window.innerWidth, ph = window.innerHeight;
     isPortrait = pw < ph;
-    bgColor = Math.min(pw, ph) < 600 ? "#7ab8e8" : "#ffffff";
+    bgColor = Math.min(pw,ph) < 600 ? "#7ab8e8" : "#ffffff";
     if (isPortrait) {
-        GW = ph; GH = pw;
-        canvas.width = GW; canvas.height = GH;
-        wrap.style.width  = GW + "px"; wrap.style.height = GH + "px";
-        wrap.style.transformOrigin = "0 0";
-        wrap.style.transform = "rotate(90deg) translateY(-" + pw + "px)";
+        GW=ph; GH=pw; canvas.width=GW; canvas.height=GH;
+        wrap.style.cssText = `width:${GW}px;height:${GH}px;transform-origin:0 0;transform:rotate(90deg) translateY(-${pw}px)`;
     } else {
-        GW = pw; GH = ph;
-        canvas.width = GW; canvas.height = GH;
-        wrap.style.width  = GW + "px"; wrap.style.height = GH + "px";
-        wrap.style.transformOrigin = "0 0";
-        wrap.style.transform = "none";
+        GW=pw; GH=ph; canvas.width=GW; canvas.height=GH;
+        wrap.style.cssText = `width:${GW}px;height:${GH}px;transform-origin:0 0;transform:none`;
     }
-    cellW = GW / GRID_COLS;
-    cellH = GH / GRID_ROWS;
+    cellW = GW / GRID_COLS; cellH = GH / GRID_ROWS;
     updateMenuPosition();
 }
 
 // ── Menu helpers ───────────────────────────────────────────────────
-function closeMenu() {
-    menuPanel.classList.remove("open");
-    menuBtn.classList.remove("open");
-}
+function closeMenu() { menuPanel.classList.remove("open"); menuBtn.classList.remove("open"); }
 function updateMenuPosition() {
     const PAD = 14;
     if (isPortrait) {
         menuWrap.classList.add("portrait-mode");
-        menuWrap.style.bottom = PAD + "px";
-        menuWrap.style.left   = PAD + "px";
-        menuWrap.style.right  = "auto";
+        menuWrap.style.cssText += ";bottom:"+PAD+"px;left:"+PAD+"px;right:auto";
     } else {
         menuWrap.classList.remove("portrait-mode");
-        menuWrap.style.bottom = PAD + "px";
-        menuWrap.style.right  = PAD + "px";
-        menuWrap.style.left   = "auto";
+        menuWrap.style.cssText += ";bottom:"+PAD+"px;right:"+PAD+"px;left:auto";
     }
 }
 
-// ── Menu item handlers ─────────────────────────────────────────────
-document.getElementById("miPlay").addEventListener("pointerup", e => {
-    e.stopPropagation(); closeMenu();
-    alert("Play — TBD");
-});
-document.getElementById("miTables").addEventListener("pointerup", e => {
-    e.stopPropagation(); closeMenu(); vmOpen();
-});
-document.getElementById("miHelp").addEventListener("pointerup", e => {
-    e.stopPropagation(); closeMenu();
-    alert("Help — coming soon");
-});
-
-menuBtn.addEventListener("pointerup", e => {
-    e.stopPropagation();
-    const isOpen = menuPanel.classList.toggle("open");
-    menuBtn.classList.toggle("open", isOpen);
-});
+document.getElementById("miPlay").addEventListener("pointerup", e => { e.stopPropagation(); closeMenu(); alert("Play — TBD"); });
+document.getElementById("miTables").addEventListener("pointerup", e => { e.stopPropagation(); closeMenu(); vmOpen(); });
+document.getElementById("miHelp").addEventListener("pointerup", e => { e.stopPropagation(); closeMenu(); alert("Help — coming soon"); });
+menuBtn.addEventListener("pointerup", e => { e.stopPropagation(); const o=menuPanel.classList.toggle("open"); menuBtn.classList.toggle("open",o); });
 menuPanel.addEventListener("pointerup", e => e.stopPropagation());
-document.addEventListener("pointerup", () => {
-    if (menuPanel.classList.contains("open")) closeMenu();
-});
+document.addEventListener("pointerup", () => { if (menuPanel.classList.contains("open")) closeMenu(); });
 
-// Ctrl-L → toggle cell labels; Ctrl-T → open Media Manager
 document.addEventListener("keydown", e => {
-    if ((e.ctrlKey || e.metaKey) && e.key === "l") {
-        e.preventDefault();
-        showCellLabels = !showCellLabels;
-        renderGrid();
-    }
-    if ((e.ctrlKey || e.metaKey) && e.key === "t") {
-        e.preventDefault(); vmOpen();
-    }
+    if ((e.ctrlKey||e.metaKey) && e.key==="l") { e.preventDefault(); showCellLabels=!showCellLabels; renderGrid(); }
+    if ((e.ctrlKey||e.metaKey) && e.key==="t") { e.preventDefault(); vmOpen(); }
 });
 
-// ═══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════════
 // MEDIA MANAGER
-// ═══════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════════
 let vmIsAdmin = false;
 const VM_DEFAULT_USER = "Guest";
 let vmCurrentUser = VM_DEFAULT_USER;
 
-function vmUserKey() { return "vmUser_" + vmCurrentUser; }
+function vmUserKey()  { return "vmUser_" + vmCurrentUser; }
 function vmGetUserData() {
-    try { return JSON.parse(localStorage.getItem(vmUserKey())) || {ratings:{}, lastUsed:{}}; }
-    catch(e) { return {ratings:{}, lastUsed:{}}; }
+    try { return JSON.parse(localStorage.getItem(vmUserKey())) || {ratings:{},lastUsed:{}}; }
+    catch(e) { return {ratings:{},lastUsed:{}}; }
 }
-function vmSaveUserData(d) { try { localStorage.setItem(vmUserKey(), JSON.stringify(d)); } catch(e) {} }
+function vmSaveUserData(d) { try { localStorage.setItem(vmUserKey(), JSON.stringify(d)); } catch(e){} }
 function vmVidKey(src, vid) { return src.filename + "::" + vid.id; }
 
 async function vmHashPassword(pwd) {
     const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(pwd));
-    return [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2,"0")).join("");
+    return [...new Uint8Array(buf)].map(x=>x.toString(16).padStart(2,"0")).join("");
 }
 
 // ── Field definitions ──────────────────────────────────────────────
-// Core fields always present; dynamic custom fields stored per-source in fieldConfig.
+// Each fieldConfig entry: { key, visible, width }
+// width is px string used for th/td style.  Default widths per type.
 const VM_BASE_FIELDS = [
-    {key:"id",       label:"ID",       editable:false,   type:"text"},
-    {key:"label",    label:"Label",    editable:"admin",  type:"text"},
-    {key:"start",    label:"Start",    editable:"admin",  type:"number"},
-    {key:"end",      label:"End",      editable:"admin",  type:"number"},
-    {key:"tdiff",    label:"Tdiff",    editable:"admin",  type:"number"},
-    {key:"category", label:"Category", editable:"admin",  type:"text",   optional:true},
-    {key:"rating",   label:"Rating",   editable:"user",   type:"rating", optional:true, perUser:true},
-    {key:"lastUsed", label:"Last Used",editable:false,    type:"date",   optional:true, perUser:true},
+    {key:"id",       label:"ID",        editable:false,   type:"text",   defWidth:180},
+    {key:"label",    label:"Label",     editable:"admin",  type:"text",   defWidth:160},
+    {key:"start",    label:"Start",     editable:"admin",  type:"number", defWidth:70},
+    {key:"end",      label:"End",       editable:"admin",  type:"number", defWidth:70},
+    {key:"tdiff",    label:"Tdiff",     editable:"admin",  type:"number", defWidth:60},
+    {key:"category", label:"Category",  editable:"admin",  type:"text",   defWidth:110, optional:true},
+    {key:"rating",   label:"Rating",    editable:"user",   type:"rating", defWidth:90,  optional:true, perUser:true},
+    {key:"lastUsed", label:"Last Used", editable:false,    type:"date",   defWidth:130, optional:true, perUser:true},
 ];
 
 function vmDefaultFieldConfig() {
-    // Default: show id, label, start, end, tdiff; hide optional
-    return VM_BASE_FIELDS.map(f => ({key: f.key, visible: !f.optional}));
+    return VM_BASE_FIELDS.map(f => ({key:f.key, visible:!f.optional, width:f.defWidth}));
 }
-
-// Look up a field def by key — supports custom fields stored in src.customFields
 function vmFieldDef(src, key) {
-    const base = VM_BASE_FIELDS.find(f => f.key === key);
+    const base = VM_BASE_FIELDS.find(f => f.key===key);
     if (base) return base;
-    if (src && src.customFields) {
-        const cf = src.customFields.find(f => f.key === key);
-        if (cf) return cf;
-    }
-    return {key, label: key, editable: false, type: "text"};
+    if (src && src.customFields) { const cf = src.customFields.find(f=>f.key===key); if(cf) return cf; }
+    return {key, label:key, editable:false, type:"text", defWidth:100};
 }
-
-// All field defs for a source (base + custom)
 function vmAllFieldDefs(src) {
     return [...VM_BASE_FIELDS, ...(src && src.customFields ? src.customFields : [])];
 }
@@ -498,19 +471,21 @@ function vmAllFieldDefs(src) {
 // ── Sources ────────────────────────────────────────────────────────
 const vmSources = [];
 let vmActiveIdx  = 0;
-let vmSortCol    = null, vmSortAsc = true;
-let vmSelected   = new Set(), vmLastClick = -1;
+let vmSortCol = null, vmSortAsc = true;
+let vmSelected = new Set(), vmLastClick = -1;
 let vmFieldPanelOpen = false, vmDragKey = null;
 
 function vmGetSource() { return vmSources[vmActiveIdx] || null; }
-function vmGetVideos() { const s = vmGetSource(); return s ? s.videos : []; }
+function vmGetVideos()  { const s=vmGetSource(); return s ? s.videos : []; }
 
-function vmLsKey(filename) { return "vmData_" + filename; }
+function vmLsKey(fn)   { return "vmData_" + fn; }
+function vmBkKey(fn)   { return "vmBackup_" + fn; }   // stores array of {ts, json}
+
 function vmSaveLS(src) {
     try {
         localStorage.setItem(vmLsKey(src.filename), JSON.stringify({
-            videos: src.videos,
-            fieldConfig: src.fieldConfig,
+            videos:       src.videos,
+            fieldConfig:  src.fieldConfig,
             customFields: src.customFields || []
         }));
         vmUpdateStatus();
@@ -524,45 +499,34 @@ function vmLoadLS(src) {
         if (d.videos)       src.videos       = d.videos;
         if (d.fieldConfig)  src.fieldConfig  = d.fieldConfig;
         if (d.customFields) src.customFields  = d.customFields;
+        // ensure width field present on all entries
+        src.fieldConfig.forEach(fc => { if (!fc.width) { const def=vmFieldDef(src,fc.key); fc.width=def.defWidth||100; }});
         return true;
     } catch(e) { return false; }
 }
 
-function vmGetUserVal(src, vid, key) {
-    const d = vmGetUserData(); return d[key]?.[vmVidKey(src, vid)];
-}
-function vmSetUserVal(src, vid, key, val) {
-    const d = vmGetUserData();
-    if (!d[key]) d[key] = {};
-    d[key][vmVidKey(src, vid)] = val;
-    vmSaveUserData(d);
+function vmGetUserVal(src,vid,key) { const d=vmGetUserData(); return d[key]?.[vmVidKey(src,vid)]; }
+function vmSetUserVal(src,vid,key,val) {
+    const d=vmGetUserData(); if(!d[key])d[key]={}; d[key][vmVidKey(src,vid)]=val; vmSaveUserData(d);
 }
 
 function vmUpdateStatus() {
     let info = "";
-    vmSources.forEach(s => { if (localStorage.getItem(vmLsKey(s.filename))) info += s.label + " ✓  "; });
+    vmSources.forEach(s => { if(localStorage.getItem(vmLsKey(s.filename))) info += s.label+" ✓  "; });
     document.getElementById("vmLsInfo").textContent = info || "none";
     const src = vmGetSource();
-    if (src) document.getElementById("vmStatusLeft").textContent =
-        src.label + " — " + src.videos.length + " items";
+    if (src) document.getElementById("vmStatusLeft").textContent = src.label + " — " + src.videos.length + " items";
 }
 
 function vmStampLastUsed(vid) {
     const stamp = new Date().toISOString().slice(0,16).replace("T"," ");
-    vmSources.forEach(src => {
-        const v = src.videos.find(v => v.id === vid.id);
-        if (v) vmSetUserVal(src, v, "lastUsed", stamp);
-    });
+    vmSources.forEach(src => { const v=src.videos.find(v=>v.id===vid.id); if(v) vmSetUserVal(src,v,"lastUsed",stamp); });
 }
 
 // ── Open / close ───────────────────────────────────────────────────
 function vmOpen() {
     document.getElementById("vmOverlay").classList.add("open");
-    vmRefreshAdminUI();
-    vmRenderTabs();
-    vmRenderFieldPanel();
-    vmRenderTable();
-    vmUpdateStatus();
+    vmRefreshAdminUI(); vmRenderTabs(); vmRenderFieldPanel(); vmRenderTable(); vmUpdateStatus();
 }
 function vmClose() { document.getElementById("vmOverlay").classList.remove("open"); }
 document.getElementById("vmCloseBtn").addEventListener("click", vmClose);
@@ -574,14 +538,10 @@ function vmRefreshAdminUI() {
     document.getElementById("vmAdminLoginBtn").style.display  = vmIsAdmin ? "none" : "";
     document.getElementById("vmUserBadge").textContent = "👤 " + vmCurrentUser;
     document.getElementById("vmUserBadge").classList.add("visible");
-    // Admin-only buttons
-    ["vmExportBtn","vmResetBtn","vmFieldToggleBtn","vmAddFieldBtn"].forEach(id => {
-        const el = document.getElementById(id);
-        if (id === "vmAddFieldBtn") el.style.display = vmIsAdmin ? "" : "none";
-        else el.disabled = !vmIsAdmin;
-    });
+    const adminBtns = ["vmExportBtn","vmBackupBtn","vmResetBtn","vmFieldToggleBtn"];
+    adminBtns.forEach(id => { document.getElementById(id).disabled = !vmIsAdmin; });
+    document.getElementById("vmAddFieldBtn").style.display = vmIsAdmin ? "" : "none";
 }
-
 document.getElementById("vmAdminLoginBtn").addEventListener("click", () => {
     document.getElementById("vmLoginModal").classList.add("open");
     document.getElementById("vmLoginPwd").value = "";
@@ -595,12 +555,10 @@ document.getElementById("vmLoginCancelBtn").addEventListener("click", () => {
     document.getElementById("vmLoginModal").classList.remove("open");
 });
 document.getElementById("vmLoginSubmitBtn").addEventListener("click", vmDoLogin);
-document.getElementById("vmLoginPwd").addEventListener("keydown", e => { if (e.key === "Enter") vmDoLogin(); });
-
+document.getElementById("vmLoginPwd").addEventListener("keydown", e => { if(e.key==="Enter") vmDoLogin(); });
 async function vmDoLogin() {
-    const pwd  = document.getElementById("vmLoginPwd").value;
-    const hash = await vmHashPassword(pwd);
-    if (hash === ADMIN_HASH) {
+    const pwd = document.getElementById("vmLoginPwd").value;
+    if (await vmHashPassword(pwd) === ADMIN_HASH) {
         vmIsAdmin = true;
         document.getElementById("vmLoginModal").classList.remove("open");
         vmRefreshAdminUI(); vmRenderTable();
@@ -613,51 +571,89 @@ async function vmDoLogin() {
 // ── Tabs ───────────────────────────────────────────────────────────
 function vmRenderTabs() {
     const el = document.getElementById("vmTabs"); el.innerHTML = "";
-    vmSources.forEach((src, i) => {
+    vmSources.forEach((src,i) => {
         const b = document.createElement("button");
-        b.className = "vm-tab" + (i === vmActiveIdx ? " active" : "");
+        b.className = "vm-tab" + (i===vmActiveIdx ? " active" : "");
         b.textContent = src.label;
         b.addEventListener("click", () => {
-            vmActiveIdx = i; vmSelected.clear(); vmSortCol = null;
+            vmActiveIdx=i; vmSelected.clear(); vmSortCol=null;
             vmRenderTabs(); vmRenderFieldPanel(); vmRenderTable(); vmUpdateStatus();
         });
         el.appendChild(b);
     });
 }
 
-// ── Field panel ────────────────────────────────────────────────────
+// ── Field panel with per-chip width control ────────────────────────
 function vmRenderFieldPanel() {
     const src = vmGetSource(); if (!src) return;
     const panel = document.getElementById("vmFieldPanel");
-    panel.innerHTML = "<h3>Column Fields — drag to reorder · click ●/○ to show/hide</h3>";
+    panel.innerHTML = "<h3>Columns — drag to reorder · ●/○ show/hide · width box (px) to resize</h3>";
 
-    // Ensure all custom fields are in fieldConfig
-    (src.customFields || []).forEach(cf => {
-        if (!src.fieldConfig.find(fc => fc.key === cf.key))
-            src.fieldConfig.push({key: cf.key, visible: true});
+    // Ensure custom fields registered in fieldConfig
+    (src.customFields||[]).forEach(cf => {
+        if (!src.fieldConfig.find(fc=>fc.key===cf.key))
+            src.fieldConfig.push({key:cf.key, visible:true, width:cf.defWidth||100});
     });
 
     src.fieldConfig.forEach(fc => {
-        const def = vmFieldDef(src, fc.key);
-        const chip = document.createElement("span");
-        chip.className = "vm-field-chip" + (fc.visible ? " active-field" : "");
-        chip.draggable = true; chip.dataset.key = fc.key;
-        chip.innerHTML = `<span class="chip-toggle">${fc.visible ? "●" : "○"}</span> ${def.label}`;
-        chip.addEventListener("click", () => { fc.visible = !fc.visible; vmSaveLS(src); vmRenderFieldPanel(); vmRenderTable(); });
-        chip.addEventListener("dragstart", () => { vmDragKey = fc.key; chip.classList.add("dragging"); });
-        chip.addEventListener("dragend",   () => { chip.classList.remove("dragging"); vmDragKey = null; });
+        const def   = vmFieldDef(src, fc.key);
+        const chip  = document.createElement("span");
+        chip.className   = "vm-field-chip" + (fc.visible ? " active-field" : "");
+        chip.draggable   = true;
+        chip.dataset.key = fc.key;
+
+        // Toggle ●/○
+        const toggle = document.createElement("span");
+        toggle.className   = "chip-toggle";
+        toggle.textContent = fc.visible ? "●" : "○";
+        toggle.title       = "Show/hide column";
+        toggle.addEventListener("click", e => {
+            e.stopPropagation(); fc.visible = !fc.visible;
+            vmSaveLS(src); vmRenderFieldPanel(); vmRenderTable();
+        });
+
+        // Label
+        const lbl = document.createElement("span");
+        lbl.textContent = " " + def.label;
+
+        chip.appendChild(toggle); chip.appendChild(lbl);
+
+        // Width input — always present so admin can resize, grayed out if hidden
+        if (vmIsAdmin) {
+            const sep = document.createElement("span");
+            sep.style.cssText = "color:#555;margin:0 2px";
+            sep.textContent = "|";
+            const wi = document.createElement("input");
+            wi.type      = "number";
+            wi.className = "chip-width-input";
+            wi.value     = fc.width || def.defWidth || 100;
+            wi.min       = 30; wi.max = 600; wi.step = 10;
+            wi.title     = "Column width in px";
+            wi.addEventListener("click", e => e.stopPropagation());
+            wi.addEventListener("change", () => {
+                fc.width = Math.max(30, Math.min(600, parseInt(wi.value)||100));
+                wi.value = fc.width;
+                vmSaveLS(src); vmRenderTable();
+            });
+            chip.appendChild(sep); chip.appendChild(wi);
+        }
+
+        // Drag-reorder
+        chip.addEventListener("dragstart", () => { vmDragKey=fc.key; chip.classList.add("dragging"); });
+        chip.addEventListener("dragend",   () => { chip.classList.remove("dragging"); vmDragKey=null; });
         chip.addEventListener("dragover",  e => { e.preventDefault(); chip.classList.add("drag-over"); });
         chip.addEventListener("dragleave", () => chip.classList.remove("drag-over"));
         chip.addEventListener("drop", e => {
             e.preventDefault(); chip.classList.remove("drag-over");
-            if (!vmDragKey || vmDragKey === fc.key) return;
-            const fi = src.fieldConfig.findIndex(x => x.key === vmDragKey);
-            const ti = src.fieldConfig.findIndex(x => x.key === fc.key);
-            if (fi < 0 || ti < 0) return;
-            const [moved] = src.fieldConfig.splice(fi, 1);
-            src.fieldConfig.splice(ti, 0, moved);
+            if (!vmDragKey || vmDragKey===fc.key) return;
+            const fi=src.fieldConfig.findIndex(x=>x.key===vmDragKey);
+            const ti=src.fieldConfig.findIndex(x=>x.key===fc.key);
+            if (fi<0||ti<0) return;
+            const [moved]=src.fieldConfig.splice(fi,1);
+            src.fieldConfig.splice(ti,0,moved);
             vmSaveLS(src); vmRenderFieldPanel(); vmRenderTable();
         });
+
         panel.appendChild(chip);
     });
 }
@@ -668,7 +664,7 @@ document.getElementById("vmFieldToggleBtn").addEventListener("click", () => {
     document.getElementById("vmAddFieldRow").classList.toggle("open", vmFieldPanelOpen && vmIsAdmin);
 });
 
-// ── Add field (admin) ──────────────────────────────────────────────
+// ── Add custom field ───────────────────────────────────────────────
 document.getElementById("vmAddFieldBtn").addEventListener("click", () => {
     if (!vmFieldPanelOpen) {
         vmFieldPanelOpen = true;
@@ -682,126 +678,249 @@ document.getElementById("vmNewFieldCancelBtn").addEventListener("click", () => {
 });
 document.getElementById("vmNewFieldAddBtn").addEventListener("click", () => {
     const src = vmGetSource(); if (!src) return;
-    const key   = document.getElementById("vmNewFieldKey").value.trim().replace(/\s+/g,"_");
-    const label = document.getElementById("vmNewFieldLabel").value.trim() || key;
-    const type  = document.getElementById("vmNewFieldType").value;
-    const editableRaw = document.getElementById("vmNewFieldEditable").value;
-    const editable = editableRaw === "false" ? false : editableRaw;
+    const key      = document.getElementById("vmNewFieldKey").value.trim().replace(/\s+/g,"_");
+    const label    = document.getElementById("vmNewFieldLabel").value.trim() || key;
+    const type     = document.getElementById("vmNewFieldType").value;
+    const editRaw  = document.getElementById("vmNewFieldEditable").value;
+    const editable = editRaw === "false" ? false : editRaw;
     if (!key) { alert("Field key is required."); return; }
-    if (vmAllFieldDefs(src).find(f => f.key === key)) { alert("A field with that key already exists."); return; }
-    if (!src.customFields) src.customFields = [];
-    src.customFields.push({key, label, editable, type, optional: true, custom: true});
-    src.fieldConfig.push({key, visible: true});
+    if (vmAllFieldDefs(src).find(f=>f.key===key)) { alert("Key already exists."); return; }
+    if (!src.customFields) src.customFields=[];
+    src.customFields.push({key, label, editable, type, defWidth:100, optional:true, custom:true});
+    src.fieldConfig.push({key, visible:true, width:100});
     vmSaveLS(src);
     document.getElementById("vmNewFieldKey").value = "";
     document.getElementById("vmNewFieldLabel").value = "";
     vmRenderFieldPanel(); vmRenderTable();
 });
 
-// ── Table ──────────────────────────────────────────────────────────
+// ── Export JSON — downloads to browser default, with save-path note ──
+// Note: browsers do not allow JS to choose an arbitrary save path (security).
+// To always land in M:\mlynx, set your browser's download folder to M:\mlynx,
+// OR use the backup/restore system and copy files manually.
+document.getElementById("vmExportBtn").addEventListener("click", () => {
+    const src = vmGetSource(); if (!src) return;
+    const out = {videos: src.videos};
+    if (src.customFields && src.customFields.length) out.customFields = src.customFields;
+    const blob = new Blob([JSON.stringify(out, null, 2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = src.filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+});
+
+// ── Backup system (stored in localStorage) ─────────────────────────
+// Each source can have up to 10 timestamped snapshots.
+const VM_MAX_BACKUPS = 10;
+
+function vmGetBackups(src) {
+    try { return JSON.parse(localStorage.getItem(vmBkKey(src.filename))) || []; }
+    catch(e) { return []; }
+}
+function vmSetBackups(src, list) {
+    try { localStorage.setItem(vmBkKey(src.filename), JSON.stringify(list)); } catch(e) {}
+}
+
+function vmSaveBackup() {
+    const src = vmGetSource(); if (!src) return;
+    const ts   = new Date().toISOString().slice(0,19).replace("T"," ");
+    const snap = JSON.stringify({videos:src.videos, customFields:src.customFields||[]});
+    const list = vmGetBackups(src);
+    list.unshift({ts, json:snap});
+    if (list.length > VM_MAX_BACKUPS) list.length = VM_MAX_BACKUPS;
+    vmSetBackups(src, list);
+    vmPopulateBackupList();
+    alert("Backup saved: " + ts);
+}
+
+function vmPopulateBackupList() {
+    const src  = vmGetSource(); if (!src) return;
+    const sel  = document.getElementById("vmBackupList"); sel.innerHTML = "";
+    const list = vmGetBackups(src);
+    if (!list.length) {
+        const opt = document.createElement("option"); opt.textContent="(no backups yet)"; sel.appendChild(opt);
+    } else {
+        list.forEach((bk,i) => {
+            const opt = document.createElement("option");
+            opt.value = i; opt.textContent = bk.ts;
+            sel.appendChild(opt);
+        });
+    }
+}
+
+document.getElementById("vmBackupBtn").addEventListener("click", () => {
+    const open = document.getElementById("vmBackupPanel").classList.toggle("open");
+    if (open) vmPopulateBackupList();
+});
+document.getElementById("vmBackupSaveBtn").addEventListener("click", vmSaveBackup);
+
+document.getElementById("vmBackupRestoreBtn").addEventListener("click", () => {
+    const src  = vmGetSource(); if (!src) return;
+    const sel  = document.getElementById("vmBackupList");
+    const idx  = parseInt(sel.value);
+    const list = vmGetBackups(src);
+    if (!list[idx]) return;
+    if (!confirm("Restore backup from " + list[idx].ts + "? Current data will be overwritten in localStorage.")) return;
+    const d = JSON.parse(list[idx].json);
+    if (d.videos)       src.videos       = d.videos;
+    if (d.customFields) src.customFields  = d.customFields;
+    vmSaveLS(src); vmRenderFieldPanel(); vmRenderTable(); vmUpdateStatus();
+    alert("Restored from: " + list[idx].ts);
+});
+
+document.getElementById("vmBackupDeleteBtn").addEventListener("click", () => {
+    const src  = vmGetSource(); if (!src) return;
+    const sel  = document.getElementById("vmBackupList");
+    const idx  = parseInt(sel.value);
+    const list = vmGetBackups(src);
+    if (!list[idx]) return;
+    if (!confirm("Delete backup: " + list[idx].ts + "?")) return;
+    list.splice(idx, 1);
+    vmSetBackups(src, list); vmPopulateBackupList();
+});
+
+// ── Reset ──────────────────────────────────────────────────────────
+document.getElementById("vmResetBtn").addEventListener("click", () => {
+    const src = vmGetSource(); if (!src) return;
+    if (!confirm("Reset '" + src.label + "' to originally fetched data? (localStorage cleared for this source)")) return;
+    localStorage.removeItem(vmLsKey(src.filename));
+    src.videos       = JSON.parse(JSON.stringify(src._original));
+    src.fieldConfig  = vmDefaultFieldConfig();
+    src.customFields = [];
+    vmRenderFieldPanel(); vmRenderTable(); vmUpdateStatus();
+});
+
+// ── Table rendering ────────────────────────────────────────────────
 function vmVisibleFields() {
     const src = vmGetSource(); if (!src) return [];
-    return src.fieldConfig.filter(fc => fc.visible).map(fc => vmFieldDef(src, fc.key));
+    return src.fieldConfig
+        .filter(fc => fc.visible)
+        .map(fc => ({...vmFieldDef(src, fc.key), _width: fc.width}));
 }
 
 function vmRenderTable() {
-    const src    = vmGetSource();
-    const thead  = document.getElementById("vmThead");
-    const tbody  = document.getElementById("vmTbody");
+    const src   = vmGetSource();
+    const thead = document.getElementById("vmThead");
+    const tbody = document.getElementById("vmTbody");
     thead.innerHTML = ""; tbody.innerHTML = "";
     if (!src || !src.videos.length) {
-        tbody.innerHTML = '<tr><td colspan="99" style="color:#888;padding:20px">No items in this source.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="99" style="color:#888;padding:20px">No items.</td></tr>';
         return;
     }
     const fields = vmVisibleFields();
 
-    // Select-all
-    const chkTh  = document.createElement("th"); chkTh.className = "no-sort"; chkTh.style.width = "32px";
-    const chkAll = document.createElement("input"); chkAll.type = "checkbox"; chkAll.title = "Select all";
+    // Select-all th
+    const chkTh = document.createElement("th");
+    chkTh.className = "no-sort"; chkTh.style.width = "32px";
+    const chkAll = document.createElement("input"); chkAll.type="checkbox"; chkAll.title="Select all";
     chkAll.addEventListener("change", () => {
-        if (chkAll.checked) src.videos.forEach((_,i) => vmSelected.add(i)); else vmSelected.clear();
+        if (chkAll.checked) src.videos.forEach((_,i)=>vmSelected.add(i)); else vmSelected.clear();
         vmRenderTable();
     });
     chkTh.appendChild(chkAll); thead.appendChild(chkTh);
 
+    // Field headers
     fields.forEach(f => {
-        const th = document.createElement("th"); th.textContent = f.label;
-        if (f.key === vmSortCol) th.classList.add(vmSortAsc ? "sort-asc" : "sort-desc");
-        th.addEventListener("click", () => {
-            if (vmSortCol === f.key) vmSortAsc = !vmSortAsc; else { vmSortCol = f.key; vmSortAsc = true; }
+        const th = document.createElement("th");
+        th.style.width    = (f._width||100) + "px";
+        th.style.maxWidth = (f._width||100) + "px";
+        th.style.position = "relative";
+        th.textContent = f.label;
+        th.className = "sortable";
+        if (f.key===vmSortCol) th.classList.add(vmSortAsc?"sort-asc":"sort-desc");
+        th.addEventListener("click", e => {
+            if (e.target.classList.contains("vm-resize-handle")) return;
+            if (vmSortCol===f.key) vmSortAsc=!vmSortAsc; else { vmSortCol=f.key; vmSortAsc=true; }
             vmSortVideos(src); vmRenderTable();
         });
-        thead.appendChild(th);
+        // Drag-resize handle
+        const rh = document.createElement("div");
+        rh.className = "vm-resize-handle";
+        rh.addEventListener("mousedown", ev => {
+            ev.preventDefault(); ev.stopPropagation();
+            rh.classList.add("resizing");
+            const startX   = ev.clientX;
+            const fc       = src.fieldConfig.find(fc=>fc.key===f.key);
+            const startW   = fc ? fc.width : 100;
+            function onMove(me) {
+                const newW = Math.max(30, Math.min(600, startW + (me.clientX - startX)));
+                if (fc) { fc.width = newW; th.style.width=newW+"px"; th.style.maxWidth=newW+"px"; }
+                // update tds in this column
+                const colIdx = fields.indexOf(f) + 1; // +1 for checkbox col
+                tbody.querySelectorAll("tr").forEach(tr=>{
+                    const td = tr.cells[colIdx];
+                    if(td){td.style.width=newW+"px";td.style.maxWidth=newW+"px";}
+                });
+            }
+            function onUp() {
+                rh.classList.remove("resizing");
+                document.removeEventListener("mousemove",onMove);
+                document.removeEventListener("mouseup",onUp);
+                if (fc) vmSaveLS(src);
+            }
+            document.addEventListener("mousemove", onMove);
+            document.addEventListener("mouseup",   onUp);
+        });
+        th.appendChild(rh); thead.appendChild(th);
     });
 
     if (vmSortCol) vmSortVideos(src);
 
     src.videos.forEach((vid, i) => {
         const tr = document.createElement("tr");
-        tr.className = "vm-row" + (vmSelected.has(i) ? " selected" : "");
+        tr.className = "vm-row" + (vmSelected.has(i)?" selected":"");
 
         const chkTd = document.createElement("td");
-        const chk   = document.createElement("input"); chk.type = "checkbox"; chk.checked = vmSelected.has(i);
+        const chk   = document.createElement("input"); chk.type="checkbox"; chk.checked=vmSelected.has(i);
         chk.addEventListener("change", e => {
             e.stopPropagation();
-            if (chk.checked) vmSelected.add(i); else vmSelected.delete(i);
-            vmUpdateSelInfo(); tr.classList.toggle("selected", vmSelected.has(i));
+            if(chk.checked) vmSelected.add(i); else vmSelected.delete(i);
+            vmUpdateSelInfo(); tr.classList.toggle("selected",vmSelected.has(i));
         });
         chkTd.appendChild(chk); tr.appendChild(chkTd);
 
         tr.addEventListener("click", e => {
-            if (e.target.tagName === "INPUT" || e.target.tagName === "BUTTON" || e.target.tagName === "SELECT") return;
-            if (e.shiftKey && vmLastClick >= 0) {
-                const lo = Math.min(i, vmLastClick), hi = Math.max(i, vmLastClick);
-                for (let x = lo; x <= hi; x++) vmSelected.add(x);
-            } else if (e.ctrlKey || e.metaKey) {
-                if (vmSelected.has(i)) vmSelected.delete(i); else vmSelected.add(i);
-            } else { vmSelected.clear(); vmSelected.add(i); }
-            vmLastClick = i; vmRenderTable();
+            if(e.target.tagName==="INPUT"||e.target.tagName==="BUTTON") return;
+            if(e.shiftKey && vmLastClick>=0){ const lo=Math.min(i,vmLastClick),hi=Math.max(i,vmLastClick); for(let x=lo;x<=hi;x++) vmSelected.add(x); }
+            else if(e.ctrlKey||e.metaKey){ if(vmSelected.has(i)) vmSelected.delete(i); else vmSelected.add(i); }
+            else { vmSelected.clear(); vmSelected.add(i); }
+            vmLastClick=i; vmRenderTable();
         });
 
         fields.forEach(f => {
             const td  = document.createElement("td");
             const def = vmFieldDef(src, f.key);
+            td.style.width    = (f._width||100)+"px";
+            td.style.maxWidth = (f._width||100)+"px";
 
             if (def.perUser) {
                 const uVal = vmGetUserVal(src, vid, f.key);
-                if (def.type === "rating") {
-                    const val   = uVal || 0;
-                    const stars = document.createElement("span"); stars.className = "vm-stars";
-                    stars.textContent = "★".repeat(val) + "☆".repeat(5 - val);
-                    stars.title = "Click to rate";
+                if (def.type==="rating") {
+                    const val=uVal||0; const stars=document.createElement("span"); stars.className="vm-stars";
+                    stars.textContent="★".repeat(val)+"☆".repeat(5-val);
                     stars.addEventListener("click", e => {
-                        e.stopPropagation();
-                        const rect   = stars.getBoundingClientRect();
-                        const newVal = Math.ceil(((e.clientX - rect.left) / rect.width) * 5);
-                        vmSetUserVal(src, vid, f.key, newVal);
-                        stars.textContent = "★".repeat(newVal) + "☆".repeat(5 - newVal);
+                        e.stopPropagation(); const r=stars.getBoundingClientRect();
+                        const nv=Math.ceil((e.clientX-r.left)/r.width*5);
+                        vmSetUserVal(src,vid,f.key,nv); stars.textContent="★".repeat(nv)+"☆".repeat(5-nv);
                     });
                     td.appendChild(stars);
-                } else {
-                    td.textContent = uVal || ""; td.style.color = "#888"; td.title = "Auto-populated";
-                }
-            } else if (def.type === "rating") {
-                const val   = vid[f.key] || 0;
-                const stars = document.createElement("span"); stars.className = "vm-stars";
-                stars.textContent = "★".repeat(val) + "☆".repeat(5 - val);
-                if (vmIsAdmin) stars.addEventListener("click", e => {
-                    e.stopPropagation();
-                    const rect   = stars.getBoundingClientRect();
-                    const newVal = Math.ceil(((e.clientX - rect.left) / rect.width) * 5);
-                    vid[f.key] = newVal; vmSaveLS(src);
-                    stars.textContent = "★".repeat(newVal) + "☆".repeat(5 - newVal);
+                } else { td.textContent=uVal||""; td.style.color="#888"; }
+            } else if (def.type==="rating") {
+                const val=vid[f.key]||0; const stars=document.createElement("span"); stars.className="vm-stars";
+                stars.textContent="★".repeat(val)+"☆".repeat(5-val);
+                if(vmIsAdmin) stars.addEventListener("click", e => {
+                    e.stopPropagation(); const r=stars.getBoundingClientRect();
+                    const nv=Math.ceil((e.clientX-r.left)/r.width*5);
+                    vid[f.key]=nv; vmSaveLS(src); stars.textContent="★".repeat(nv)+"☆".repeat(5-nv);
                 });
                 td.appendChild(stars);
             } else {
-                const dispVal = vid[f.key] !== undefined ? String(vid[f.key]) : "";
-                const canEdit = (def.editable === "admin" && vmIsAdmin) || (def.editable === "user");
+                const dispVal = vid[f.key]!==undefined ? String(vid[f.key]) : "";
+                const canEdit = (def.editable==="admin"&&vmIsAdmin)||(def.editable==="user");
                 td.textContent = dispVal;
-                if (canEdit) {
-                    td.className = "editable";
-                    td.addEventListener("click", e => { e.stopPropagation(); vmStartEdit(td, vid, def, src); });
-                } else { td.className = "locked"; }
+                if (canEdit) { td.className="editable"; td.addEventListener("click", e=>{e.stopPropagation(); vmStartEdit(td,vid,def,src);}); }
+                else          { td.className="locked"; }
             }
             tr.appendChild(td);
         });
@@ -812,98 +931,70 @@ function vmRenderTable() {
 
 function vmSortVideos(src) {
     if (!vmSortCol) return;
-    const def = vmFieldDef(src, vmSortCol);
-    src.videos.sort((a, b) => {
-        let av, bv;
-        if (def.perUser) { av = vmGetUserVal(src,a,vmSortCol)??""; bv = vmGetUserVal(src,b,vmSortCol)??""; }
-        else             { av = a[vmSortCol]??"";                   bv = b[vmSortCol]??""; }
-        if (!isNaN(parseFloat(av)) && !isNaN(parseFloat(bv))) { av = parseFloat(av); bv = parseFloat(bv); }
-        else { av = String(av).toLowerCase(); bv = String(bv).toLowerCase(); }
-        return vmSortAsc ? (av < bv ? -1 : av > bv ? 1 : 0) : (av > bv ? -1 : av < bv ? 1 : 0);
+    const def=vmFieldDef(src,vmSortCol);
+    src.videos.sort((a,b)=>{
+        let av,bv;
+        if(def.perUser){av=vmGetUserVal(src,a,vmSortCol)??"";bv=vmGetUserVal(src,b,vmSortCol)??"";}
+        else           {av=a[vmSortCol]??"";              bv=b[vmSortCol]??"";}
+        if(!isNaN(parseFloat(av))&&!isNaN(parseFloat(bv))){av=parseFloat(av);bv=parseFloat(bv);}
+        else{av=String(av).toLowerCase();bv=String(bv).toLowerCase();}
+        return vmSortAsc?(av<bv?-1:av>bv?1:0):(av>bv?-1:av<bv?1:0);
     });
 }
 function vmUpdateSelInfo() {
-    document.getElementById("vmSelInfo").textContent = vmSelected.size + " selected / " + vmGetVideos().length + " total";
+    document.getElementById("vmSelInfo").textContent = vmSelected.size+" selected / "+vmGetVideos().length+" total";
 }
 
-// ── Inline editing ─────────────────────────────────────────────────
+// ── Inline cell editing ────────────────────────────────────────────
 function vmStartEdit(td, vid, field, src) {
     if (td.querySelector("input")) return;
-    const prev = td.textContent; td.textContent = "";
-    const inp = document.createElement("input");
-    inp.type  = field.type === "number" ? "number" : "text";
-    if (field.type === "number") inp.step = "0.1";
-    inp.value = vid[field.key] !== undefined ? vid[field.key] : "";
-    inp.className = "vm-cell-input";
+    const prev=td.textContent; td.textContent="";
+    const inp=document.createElement("input");
+    inp.type  = field.type==="number"?"number":"text";
+    if(field.type==="number") inp.step="0.1";
+    inp.value = vid[field.key]!==undefined ? vid[field.key] : "";
+    inp.className="vm-cell-input";
     function commit() {
-        let val = inp.value.trim();
-        if (field.type === "number") { val = val === "" ? undefined : parseFloat(val); }
-        if (val === undefined) delete vid[field.key]; else vid[field.key] = val;
+        let val=inp.value.trim();
+        if(field.type==="number"){val=val===""?undefined:parseFloat(val);}
+        if(val===undefined) delete vid[field.key]; else vid[field.key]=val;
         vmSaveLS(src);
-        td.textContent = val !== undefined ? String(val) : "";
-        td.className = "editable";
+        td.textContent = val!==undefined?String(val):"";
+        td.className="editable";
     }
     inp.addEventListener("blur", commit);
-    inp.addEventListener("keydown", e => {
-        if (e.key === "Enter") { e.preventDefault(); inp.blur(); }
-        if (e.key === "Escape") { td.textContent = prev; td.className = "editable"; }
+    inp.addEventListener("keydown", e=>{
+        if(e.key==="Enter"){e.preventDefault();inp.blur();}
+        if(e.key==="Escape"){td.textContent=prev;td.className="editable";}
     });
     td.appendChild(inp); inp.focus(); inp.select();
 }
 
-// ── Toolbar ────────────────────────────────────────────────────────
-document.getElementById("vmExportBtn").addEventListener("click", () => {
-    const src = vmGetSource(); if (!src) return;
-    // Merge customFields into the export object alongside videos
-    const out = {videos: src.videos};
-    if (src.customFields && src.customFields.length) out.customFields = src.customFields;
-    const blob = new Blob([JSON.stringify(out, null, 2)], {type: "application/json"});
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob); a.download = src.filename; a.click();
-    URL.revokeObjectURL(a.href);
-});
-document.getElementById("vmResetBtn").addEventListener("click", () => {
-    const src = vmGetSource(); if (!src) return;
-    if (!confirm("Reset '" + src.label + "' to originally fetched data?")) return;
-    localStorage.removeItem(vmLsKey(src.filename));
-    src.videos       = JSON.parse(JSON.stringify(src._original));
-    src.fieldConfig  = vmDefaultFieldConfig();
-    src.customFields = [];
-    vmRenderFieldPanel(); vmRenderTable(); vmUpdateStatus();
-});
-
 // ── Bootstrap: fetch JSON sources ──────────────────────────────────
 Promise.all([
-    fetch("yt.json?v=" + Date.now()).then(r => r.json()).catch(() => ({videos:[]})),
-    fetch("@PechPongTT.short.json?v=" + Date.now()).then(r => r.json()).catch(() => ({videos:[]}))
-]).then(([ytData, ttData]) => {
-    [
-        {label:"YT Videos", filename:"yt.json",                  data: ytData},
-        {label:"PlayTT",    filename:"@PechPongTT.short.json",   data: ttData}
-    ].forEach(s => {
+    fetch("yt.json?v="+Date.now()).then(r=>r.json()).catch(()=>({videos:[]})),
+    fetch("@PechPongTT.short.json?v="+Date.now()).then(r=>r.json()).catch(()=>({videos:[]}))
+]).then(([ytData,ttData]) => {
+    [{label:"YT Videos",filename:"yt.json",data:ytData},
+     {label:"PlayTT",filename:"@PechPongTT.short.json",data:ttData}]
+    .forEach(s => {
         const src = {
-            label:        s.label,
-            filename:     s.filename,
-            videos:       s.data.videos || [],
-            customFields: s.data.customFields || [],
-            fieldConfig:  vmDefaultFieldConfig(),
-            _original:    JSON.parse(JSON.stringify(s.data.videos || []))
+            label:s.label, filename:s.filename,
+            videos:      s.data.videos||[],
+            customFields:s.data.customFields||[],
+            fieldConfig: vmDefaultFieldConfig(),
+            _original:   JSON.parse(JSON.stringify(s.data.videos||[]))
         };
         vmLoadLS(src);
         vmSources.push(src);
     });
     setupLayout(); renderGrid();
-}).catch(err => {
-    console.warn("JSON sources not available:", err.message);
-    setupLayout(); renderGrid();
-});
+}).catch(err => { console.warn("JSON not available:", err.message); setupLayout(); renderGrid(); });
 
 // ── Init ───────────────────────────────────────────────────────────
-setupLayout();
-renderGrid();
-
-window.addEventListener("resize",            () => { setupLayout(); renderGrid(); });
-window.addEventListener("orientationchange", () => { setTimeout(() => { setupLayout(); renderGrid(); }, 350); });
+setupLayout(); renderGrid();
+window.addEventListener("resize",            ()=>{ setupLayout(); renderGrid(); });
+window.addEventListener("orientationchange", ()=>{ setTimeout(()=>{ setupLayout(); renderGrid(); }, 350); });
 </script>
 </body>
 </html>

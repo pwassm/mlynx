@@ -1,0 +1,23 @@
+{
+  "sets": [
+    {
+      "name": "Fish",
+      "folder": "fish",
+      "items": [
+        { "base": "California-Sheephead-Juvenile", "label": "California Sheephead Juvenile" },
+        { "base": "California-Sheephead-Male",     "label": "California Sheephead Male" },
+        { "base": "Garibaldi-Juvenile",            "label": "Garibaldi Juvenile" },
+        { "base": "Garibaldi-Tiny",                "label": "Garibaldi Tiny" }
+      ]
+    },
+    {
+      "name": "Birds",
+      "folder": "birds",
+      "items": [
+        { "base": "Red-Phalarope",      "label": "Red Phalarope" },
+        { "base": "Marble-Godwit",      "label": "Marble Godwit" },
+        { "base": "Red-neck-Phalarope", "label": "Red-necked Phalarope" }
+      ]
+    }
+  ]
+}
